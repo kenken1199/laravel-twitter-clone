@@ -3,7 +3,8 @@
 use App\Http\Controllers\TweetsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FavoritesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,4 +38,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     // ツイート関連
     Route::resource('tweets', TweetsController::class, ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
+
+    // コメント関連
+    Route::resource('comments', CommentsController::class, ['only' => ['store']]);
+
+    // いいね関連
+    Route::resource('favorites', FavoritesController::class, ['only' => ['store', 'destroy']]);
 });
