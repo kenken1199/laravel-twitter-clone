@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TweetsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 
@@ -33,4 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     // フォロー/フォロー解除を追加
     Route::post('users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
     Route::delete('users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
+
+    // ツイート関連
+    Route::resource('tweets', TweetsController::class, ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
 });

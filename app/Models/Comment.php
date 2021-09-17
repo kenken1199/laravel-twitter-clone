@@ -14,4 +14,15 @@ class Comment extends Model
     protected $fillable = [
         'text'
     ];
+
+    // getCommentsのwith('user')に必要
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getComments(Int $tweet_id)
+    {
+        return $this->with('user')->where('tweet_id', $tweet_id)->get();
+    }
 }
