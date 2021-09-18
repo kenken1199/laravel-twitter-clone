@@ -24,7 +24,7 @@ class TweetsController extends Controller
 
         $timelines = $tweet->getTimeLines($user->id, $following_ids);
 
-        return view('tweets.index', [
+        return view('tweets.index2', [
             'user' => $user,
             'timelines' => $timelines
         ]);
