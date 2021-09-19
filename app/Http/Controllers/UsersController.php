@@ -18,9 +18,11 @@ class UsersController extends Controller
      */
     public function index(User $user)
     {
+        $login_user = auth()->user();
         $all_users = $user->getAllUsers(auth()->user()->id);
 
-        return view('users.index', [
+        return view('users.index2', [
+            'login_user' => $login_user,
             'all_users' => $all_users
         ]);
     }
@@ -62,7 +64,8 @@ class UsersController extends Controller
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
 
-        return view('users.show', [
+        return view('users.show2', [
+            'login_user' => $login_user,
             'user' => $user,
             'is_following' => $is_following,
             'is_followed' => $is_followed,

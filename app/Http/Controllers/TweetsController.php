@@ -24,7 +24,7 @@ class TweetsController extends Controller
 
         $timelines = $tweet->getTimeLines($user->id, $following_ids);
 
-        return view('tweets.index', [
+        return view('tweets.index2', [
             'user' => $user,
             'timelines' => $timelines
         ]);
@@ -39,7 +39,7 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
 
-        return view('tweets.create', [
+        return view('tweets.create2', [
             'user' => $user
         ]);
     }
@@ -76,7 +76,7 @@ class TweetsController extends Controller
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
 
-        return view('tweets.show', [
+        return view('tweets.show2', [
             'user' => $user,
             'tweet' => $tweet,
             'comments' => $comments
@@ -98,7 +98,7 @@ class TweetsController extends Controller
             return redirect('tweets');
         }
 
-        return view('tweets.edit', [
+        return view('tweets.edit2', [
             'user' => $user,
             'tweet' => $tweet
         ]);
