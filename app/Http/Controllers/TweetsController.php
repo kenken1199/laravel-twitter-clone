@@ -39,7 +39,7 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
 
-        return view('tweets.create', [
+        return view('tweets.create2', [
             'user' => $user
         ]);
     }
