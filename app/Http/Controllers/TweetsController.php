@@ -98,7 +98,7 @@ class TweetsController extends Controller
             return redirect('tweets');
         }
 
-        return view('tweets.edit', [
+        return view('tweets.edit2', [
             'user' => $user,
             'tweet' => $tweet
         ]);

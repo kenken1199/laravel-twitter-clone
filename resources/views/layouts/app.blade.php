@@ -23,9 +23,6 @@
 
 <body class="font-sans antialiased">
     <div class="overflow-x-hidden bg-gray-100">
-        @include('layouts.navigation2')
-
-        <!-- Page Content -->
         <main>
             {{ $slot }}
         </main>

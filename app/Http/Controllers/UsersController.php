@@ -18,9 +18,11 @@ class UsersController extends Controller
      */
     public function index(User $user)
     {
+        $login_user = auth()->user();
         $all_users = $user->getAllUsers(auth()->user()->id);
 
         return view('users.index2', [
+            'login_user' => $login_user,
             'all_users' => $all_users
         ]);
     }
