@@ -22,10 +22,8 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="overflow-x-hidden bg-gray-100">
-        <main>
-            {{ $slot }}
-        </main>
+    <div class=" bg-gray-100">
+        {{ $slot }}
     </div>
     <footer class="px-6 py-2 text-gray-100 bg-gray-800">
         <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="#" class="text-2xl font-bold">Brand</a>

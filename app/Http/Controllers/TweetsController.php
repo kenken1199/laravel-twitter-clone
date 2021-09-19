@@ -76,7 +76,7 @@ class TweetsController extends Controller
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
 
-        return view('tweets.show', [
+        return view('tweets.show2', [
             'user' => $user,
             'tweet' => $tweet,
             'comments' => $comments

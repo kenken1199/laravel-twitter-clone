@@ -27,7 +27,7 @@
     <div class="flex items-center justify-between px-2 py-4 max-w-2xl mx-auto">
         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Create</h1>
     </div>
-    <div class="my-6">
+    <div class="py-6">
         <div class="max-w-xl px-10 pt-6 pb-6 mx-auto bg-white rounded-lg shadow-md">
             <form method="POST" action="{{ route('tweets.store') }}">
                 @csrf

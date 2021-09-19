@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="mt-6">
+    <div class="pt-6">
         <div class="max-w-xl px-10 pt-6 pb-6 mx-auto bg-white rounded-lg shadow-md">
             <div class="card-header">Create</div>
             <form method="POST" action="{{ route('tweets.store') }}">
