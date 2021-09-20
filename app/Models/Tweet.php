@@ -32,7 +32,7 @@ class Tweet extends Model
 
     public function getUserTimeLine(Int $user_id)
     {
-        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
+        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(5);
     }
 
     public function getTweetCount(Int $user_id)
@@ -45,7 +45,7 @@ class Tweet extends Model
     {
         // 自身とフォローしているユーザIDを結合する
         $follow_ids[] = $user_id;
-        return $this->WhereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+        return $this->WhereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(5);
     }
 
     // 詳細画面

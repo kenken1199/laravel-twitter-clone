@@ -90,7 +90,7 @@
 
 
         @forelse ($comments as $comment)
-        <div class="flex items-center justify-between my-4 ">
+        <div class="flex items-center justify-between py-4 ">
             <div><a href="{{ url('users/' .$comment->user->id) }}"><img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" alt="avatar" class=" hidden object-cover w-20 h-20  rounded-full sm:block "></a></div>
             <div class="mr-auto">
                 <a href="{{ url('users/' .$comment->user->id) }}" class="font-bold items-center ml-4 text-xl text-gray-700 hover:underline">{{ $comment->user->screen_name }}</a><span class="text-sm">@</span><span class="text-sm">{{ $comment->user->name }}</span>
@@ -105,11 +105,9 @@
         <div>
             <p class="">コメントはまだありません。</p>
         </div>
+        @endforelse
     </div>
-    @endforelse
-    @if(isset($comment))
-    </div>
-    @endif
+
     <div class="py-6">
         <div class="max-w-xl px-10 pt-6 pb-6 mx-auto bg-white rounded-lg shadow-md">
             <form method="POST" action="{{ route('comments.store') }}">

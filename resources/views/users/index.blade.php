@@ -39,10 +39,10 @@
         </div>
         @endforeach
 
-        <div class="my-8">
-            <div class="">
-                {{ $all_users->links() }}
-            </div>
+
+        <div class="py-8 flex justify-center">
+            {{ $all_users->links() }}
         </div>
+
     </div>
 </x-app-layout>

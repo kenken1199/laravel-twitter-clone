@@ -140,8 +140,9 @@
         </div>
         <!-- ここまで -->
         @endforeach
-        <div class="">
+        <div class="py-8 flex justify-center">
             {{ $timelines->links() }}
         </div>
         @endif
+    </div>
 </x-app-layout>
