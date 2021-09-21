@@ -40,7 +40,7 @@
                             <form method="POST" action="{{ url('tweets/' .$tweet->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type=" submit" class="text-left w-48 px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">削除</button>
+                                <button type=" submit" name="name" value="from_tweets_show" class="text-left w-48 px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">削除</button>
                             </form>
                         </div>
                     </div>

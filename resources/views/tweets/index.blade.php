@@ -1,4 +1,6 @@
 <x-app-layout>
+
+
     <div class="flex items-center justify-between px-2 py-4 max-w-2xl mx-auto">
         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Posts</h1>
         <a href=" {{ url('users') }}" class=" hover:underline ">ユーザ一覧<i class=" fas fa-users" class="fa-fw"></i></a>

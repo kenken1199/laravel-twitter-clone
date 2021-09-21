@@ -130,11 +130,15 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tweet $tweet)
+    public function destroy(Request $request, Tweet $tweet)
     {
         $user = auth()->user();
         $tweet->tweetDestroy($user->id, $tweet->id);
+        $name = $request->input('name');
 
+        if ($name === "from_tweets_show") {
+            return redirect('tweets');
+        }
         return back();
     }
 }
