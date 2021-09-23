@@ -54,6 +54,7 @@
             <div class="mt-2 border-b">
                 <p class="my-5 text-gray-600">{!! nl2br(e($timeline->text)) !!}</p>
             </div>
+
             <div class="flex justify-end ml-2">
                 <div class="flex justify-end items-center">
                     <a href="{{ url('tweets/' .$timeline->id) }}"><i class="far fa-comment fa-fw"></i></a>
@@ -61,22 +62,21 @@
                 </div>
 
                 <div class="flex items-center justify-end ml-3">
-                    @if (!in_array($user->id, array_column($timeline->favorites->toArray(), 'user_id'), TRUE))
-                    <form method="POST" action="{{ url('favorites/') }}" class="">
-                        @csrf
-
-                        <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                        <button type="submit" class=""><i class="far fa-heart fa-fw"></i></button>
-                    </form>
+                    <!-- いいねをつける -->
+                    @if (!$timeline->isLikedBy(Auth::user()))
+                    <span class="likes">
+                        <i class="far fa-heart fa-fw like_button"></i>
+                        <input id="tweet_id" type="hidden" name="tweet_id" value="{{$timeline->id}}">
+                        <span class="like-counter">{{ count($timeline->favorites) }}</span>
+                    </span>
                     @else
-                    <form method="POST" action="{{ url('favorites/' .array_column($timeline->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" class="mb-0">
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit" class=""><i class="fas fa-heart fa-fw"></i></button>
-                    </form>
+                    <!-- いいねを消す -->
+                    <span class="likes">
+                        <i class=" far fas fa-heart fa-fw text-red-600 like_button"></i>
+                        <input id="tweet_id" type="hidden" name="tweet_id" value="{{$timeline->id}}">
+                        <span class="like-counter">{{ count($timeline->favorites) }}</span>
+                    </span>
                     @endif
-                    <p class="">{{ count($timeline->favorites) }}</p>
                 </div>
             </div>
         </div>
@@ -88,4 +88,29 @@
     <div class="py-8 flex justify-center">
         {{ $timelines->links() }}
     </div>
+    <script>
+        let btns = document.querySelectorAll('.like_button');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', async function () {
+                const input = this.nextElementSibling
+                const tweet_id = input.value
+                let tweet = {};
+                tweet.tweet_id = tweet_id;
+                var d = JSON.stringify(tweet);
+                let response = await fetch("{{ route('like') }}", {
+                    headers: {
+                        "X-CSRF-Token": document.querySelector('input[name=_token]').value,
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    method: 'POST',
+                    body: d,
+                })
+                const data = await response.json();
+                const counter = input.nextElementSibling;
+                counter.innerHTML = data.review_likes_count;
+                this.classList.toggle('text-red-600')
+                this.classList.toggle('fas')
+            }, false);
+        }
+    </script>
 </x-app-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Favorite;
+use App\Models\Tweet;
 
 class FavoritesController extends Controller
 {
@@ -98,5 +99,24 @@ class FavoritesController extends Controller
             return back();
         }
         return back();
+    }
+
+    public function like(Request $request, Favorite $favorite)
+    {
+        $user = auth()->user(); //1.ログインユーザー取得
+        $tweet_id = $request->tweet_id; //2.投稿idの取得
+        $is_favorite = $favorite->isFavorite($user->id, $tweet_id);
+
+        if (!$is_favorite) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
+            $favorite->storeFavorite($user->id, $tweet_id);
+        } else { //もしこのユーザーがこの投稿に既にいいねしてたらdelete
+            Favorite::where('user_id', $user->id)->where('tweet_id', $tweet_id)->delete();
+        }
+        //5.この投稿の最新の総いいね数を取得
+        $review_likes_count = Tweet::withCount('favorites')->findOrFail($tweet_id)->favorites_count;
+        $param = [
+            'review_likes_count' => $review_likes_count,
+        ];
+        return response()->json($param); //6.JSONデータをjQueryに返す
     }
 }

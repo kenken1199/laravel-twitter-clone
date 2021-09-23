@@ -44,4 +44,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // いいね関連
     Route::resource('favorites', FavoritesController::class, ['only' => ['store', 'destroy']]);
+
+    Route::post('/like', [FavoritesController::class, 'like'])->name('like');
 });

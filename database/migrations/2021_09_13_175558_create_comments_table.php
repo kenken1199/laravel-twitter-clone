@@ -14,9 +14,16 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id')->comment('ユーザID');
-            $table->unsignedInteger('tweet_id')->comment('ツイートID');
+            $table->bigIncrements('id');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('tweet_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('text')->comment('本文');
             $table->softDeletes();
             $table->timestamps();
@@ -24,18 +31,6 @@ class CreateCommentsTable extends Migration
             $table->index('id');
             $table->index('user_id');
             $table->index('tweet_id');
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('tweet_id')
-                ->references('id')
-                ->on('tweets')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 

@@ -16,6 +16,11 @@ class Favorite extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tweet()
+    {
+        return $this->belongsTo(Tweet::class);
+    }
+
     // いいねしているかどうかの判定処理
     public function isFavorite(Int $user_id, Int $tweet_id)
     {

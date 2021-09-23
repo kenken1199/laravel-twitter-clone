@@ -81,4 +81,9 @@ class Tweet extends Model
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
+
+    public function isLikedBy($user): bool
+    {
+        return Favorite::where('user_id', $user->id)->where('tweet_id', $this->id)->first() !== null;
+    }
 }
