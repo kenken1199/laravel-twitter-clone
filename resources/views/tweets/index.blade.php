@@ -65,15 +65,13 @@
                     <!-- いいねをつける -->
                     @if (!$timeline->isLikedBy(Auth::user()))
                     <span class="likes">
-                        <i class="far fa-heart fa-fw like_button"></i>
-                        <input id="tweet_id" type="hidden" name="tweet_id" value="{{$timeline->id}}">
+                        <i class="far fa-heart fa-fw like_button" data-tweet_id="{{$timeline->id}}"></i>
                         <span class="like-counter">{{ count($timeline->favorites) }}</span>
                     </span>
                     @else
                     <!-- いいねを消す -->
                     <span class="likes">
-                        <i class=" far fas fa-heart fa-fw text-red-600 like_button"></i>
-                        <input id="tweet_id" type="hidden" name="tweet_id" value="{{$timeline->id}}">
+                        <i class=" far fas fa-heart fa-fw text-red-600 like_button" data-tweet_id="{{$timeline->id}}"></i>
                         <span class="like-counter">{{ count($timeline->favorites) }}</span>
                     </span>
                     @endif
@@ -91,9 +89,8 @@
     <script>
         let btns = document.querySelectorAll('.like_button');
         for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener('click', async function () {
-                const input = this.nextElementSibling
-                const tweet_id = input.value
+            btns[i].addEventListener('click', async function() {
+                const tweet_id = this.dataset.tweet_id;
                 let tweet = {};
                 tweet.tweet_id = tweet_id;
                 var d = JSON.stringify(tweet);
@@ -106,7 +103,7 @@
                     body: d,
                 })
                 const data = await response.json();
-                const counter = input.nextElementSibling;
+                const counter = this.nextElementSibling;
                 counter.innerHTML = data.review_likes_count;
                 this.classList.toggle('text-red-600')
                 this.classList.toggle('fas')
