@@ -11,17 +11,17 @@
     <div class="pt-6">
         <div class="max-w-xl px-10 pt-6 pb-2 mx-auto bg-white rounded-lg shadow-md">
             <div class="flex justify-between items-center mt-4">
-                <div><img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" alt="avatar" class=" hidden object-cover w-20 h-20  rounded-full sm:block items-center "></div>
+                <div><img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" alt="avatar" class=" mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block items-center "></div>
                 <div class="mr-auto">
                     <a href="{{ url('users/' .$timeline->user->id) }}" class="font-bold items-center ml-4 text-xl text-gray-700 hover:underline">{{ $timeline->user->screen_name }}</a>
-                    <span class="text-sm">@</span><span class="text-sm">{{ $timeline->user->name }}</span>
+                    <span class="text-sm ml-4 md:ml-0">@</span><span class="text-sm">{{ $timeline->user->name }}</span>
                 </div>
                 @if ($timeline->user->id === Auth::user()->id)
-                <div class=" text-gray-600 font-light ">
+                <div class=" text-gray-600 text-sm font-light ">
                     {{ $timeline->created_at->format('Y-m-d H:i') }}
                 </div>
                 @else
-                <div class=" text-gray-600 mr-9 font-light ">
+                <div class=" text-gray-600 text-sm mr-9 font-light ">
                     {{ $timeline->created_at->format('Y-m-d H:i') }}
                 </div>
                 @endif
@@ -36,14 +36,14 @@
 
                         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
-                        <div x-show="dropdownOpen" class="absolute mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+                        <div x-show="dropdownOpen" class="absolute mt-2 py-2  w-15 md:w-48 bg-white rounded-md shadow-xl z-20">
                             <a href="{{ url('tweets/' .$timeline->id .'/edit') }}" class="block px-4 py-2 text-sm  text-gray-700 hover:bg-blue-500 hover:text-white">
                                 編集
                             </a>
                             <form method="POST" action="{{ url('tweets/' .$timeline->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type=" submit" class="text-left w-48 px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">削除</button>
+                                <button type=" submit" class="text-left  w-15 md:w-48 px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">削除</button>
                             </form>
                         </div>
                     </div>
