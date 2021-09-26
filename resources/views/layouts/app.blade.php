@@ -46,22 +46,6 @@
 
                         </div>
                 </div>
-
-                <!-- Menu, if mobile set to hidden -->
-                <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
-                    <div class="flex flex-col md:flex-row md:ml-6">
-                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
-                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
-                        <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <input type="submit" value="ログアウト" class="bg-white ">
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
                 <!-- Menu, if mobile set to hidden -->
                 <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
                     <div class="flex flex-col md:flex-row md:ml-6">
