@@ -13,8 +13,10 @@
             <div class="flex justify-between items-center mt-4">
                 <div><img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" alt="avatar" class=" mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block items-center "></div>
                 <div class="mr-auto">
-                    <a href="{{ url('users/' .$timeline->user->id) }}" class="font-bold items-center ml-4 text-xl text-gray-700 hover:underline">{{ $timeline->user->screen_name }}</a>
-                    <span class="text-sm ml-4 md:ml-0">@</span><span class="text-sm">{{ $timeline->user->name }}</span>
+                    <a href="{{ url('users/' .$timeline->user->id) }}" class="font-bold items-center ml-1 md:ml-4 text-xl text-gray-700 hover:underline">{{ $timeline->user->screen_name }}</a>
+                    <div class="md:ml-4">
+                        <span class="text-sm ml-1 md:ml-0">@</span><span class="text-sm">{{ $timeline->user->name }}</span>
+                    </div>
                 </div>
                 @if ($timeline->user->id === Auth::user()->id)
                 <div class=" text-gray-600 text-sm font-light ">
