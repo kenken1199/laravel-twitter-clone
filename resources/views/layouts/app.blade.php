@@ -23,37 +23,35 @@
 
 
 
-<body class="font-sans bg-gray-100 antialiased">
+<body class="font-sans h-full  antialiased flex flex-col">
     <nav class="px-6 py-2 bg-white shadow">
         <div x-data="{isOpen: false }" class="max-w-3xl mx-auto py-3 px-6 mb:px-0 md:flex md:justify-between md:items-center">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                        <img src="{{ asset('storage/profile_image/' .Auth::user()->profile_image) }}" alt="avatar" class=" h-8 w-8 shadow rounded-full">
-                        <a href="{{ url('users/' .Auth::user()->id )}}" class="text-gray-800 text-xl hover:text-gray-700 ml-4">{{Auth::user()->name}}</a>
-                    </div>
-                    <!-- Mobile menu button -->
-                    <div class="flex md:hidden">
-                        <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu"
-                        @click="isOpen = !isOpen">
-                            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                                <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="{{ asset('storage/profile_image/' .Auth::user()->profile_image) }}" alt="avatar" class=" h-8 w-8 shadow rounded-full">
+                    <a href="{{ url('users/' .Auth::user()->id )}}" class="text-gray-800 text-xl hover:text-gray-700 ml-4">{{Auth::user()->name}}</a>
                 </div>
+                <!-- Mobile menu button -->
+                <div class="flex md:hidden">
+                    <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" @click="isOpen = !isOpen">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                            <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-                <!-- Menu, if mobile set to hidden -->
-                <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
-                    <div class="flex flex-col md:flex-row md:ml-6">
-                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
-                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
-                        <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <input type="submit" value="ログアウト" class="bg-white ">
-                            </form>
-                        </div>
+            <!-- Menu, if mobile set to hidden -->
+            <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
+                <div class="flex flex-col md:flex-row md:ml-6">
+                    <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
+                    <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
+                    <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <input type="submit" value="ログアウト" class="bg-white ">
+                        </form>
                     </div>
                 </div>
             </div>
