@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 
 <head>
     <meta charset="utf-8">
@@ -21,8 +21,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body class="font-sans h-full  antialiased flex flex-col">
 
+
+<body class="font-sans h-full  antialiased flex flex-col">
     <nav class="px-6 py-2 bg-white shadow">
         <div x-data="{isOpen: false }" class="max-w-3xl mx-auto py-3 px-6 mb:px-0 md:flex md:justify-between md:items-center">
             <div class="flex justify-between items-center">
@@ -33,38 +34,33 @@
                 <!-- Mobile menu button -->
                 <div class="flex md:hidden">
                     <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" @click="isOpen = !isOpen">
-
-                        <!-- Mobile menu button -->
-                        <div class="flex md:hidden">
-                            <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" @click="isOpen = !isOpen">
-
-                                <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                                    <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
-                                    </path>
-                                </svg>
-                            </button>
-
-                        </div>
+                        <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                            <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
-                <!-- Menu, if mobile set to hidden -->
-                <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
-                    <div class="flex flex-col md:flex-row md:ml-6">
-                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
-                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
-                        <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <input type="submit" value="ログアウト" class="bg-white ">
-                            </form>
-                        </div>
+            </div>
+
+            <!-- Menu, if mobile set to hidden -->
+            <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
+                <div class="flex flex-col md:flex-row md:ml-6">
+                    <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
+                    <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
+                    <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <input type="submit" value="ログアウト" class="bg-white ">
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
     </nav>
-    <div class=" bg-gray-100">
+    <div class=" bg-gray-100 flex-1">
         {{ $slot }}
     </div>
-    <footer class="px-6 py-2 text-red-500 bg-red-500　">
+    <footer class="px-6 py-2 text-gray-100 bg-gray-800">
         <div class="container flex flex-col items-center justify-between mx-auto md:flex-row"><a href="#" class="text-2xl font-bold">Brand</a>
             <p class="mt-2 md:mt-0">All rights reserved 2020.</p>
             <div class="flex mt-4 mb-2 -mx-2 md:mt-0 md:mb-0"><a href="#" class="mx-2 text-gray-100 hover:text-gray-400"><svg viewBox="0 0 512 512" class="w-4 h-4 fill-current">
@@ -80,30 +76,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        let btns = document.querySelectorAll('.like_button');
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener('click', async function() {
-                const tweet_id = this.dataset.tweet_id;
-                let tweet = {};
-                tweet.tweet_id = tweet_id;
-                var d = JSON.stringify(tweet);
-                let response = await fetch("{{ route('like') }}", {
-                    headers: {
-                        "X-CSRF-Token": document.querySelector('input[name=_token]').value,
-                        'Content-Type': 'application/json;charset=utf-8',
-                    },
-                    method: 'POST',
-                    body: d,
-                })
-                const data = await response.json();
-                const counter = this.nextElementSibling;
-                counter.innerHTML = data.review_likes_count;
-                this.classList.toggle('text-red-600')
-                this.classList.toggle('fas')
-            }, false);
-        }
-    </script>
 </body>
 
 </html>
