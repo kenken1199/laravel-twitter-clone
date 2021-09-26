@@ -4,21 +4,24 @@
         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Users</h1>
     </div>
     @foreach ($all_users as $user)
-    <div class="mt-6">
+    <div class="mt-4">
         <div class="max-w-xl px-10 pt-6 pb-6 mx-auto bg-white rounded-lg shadow-md">
+            @if (auth()->user()->isFollowed($user->id))
+            <div class="ml-1 mb-2 w-auto inline-block rounded-sm self-center bg-gray-200">
+                <span class="">フォローされています</span>
+            </div>
+            @endif
             <div class="flex">
                 <div class="flex items-center">
-                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" alt="avatar" class=" hidden object-cover w-20 h-20  rounded-full sm:block  ">
+                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" alt="avatar" class=" mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block items-center ">
                     <div class="ml-1">
-                        <p class="">{{ $user->name }}</p>
-                        <a href="{{ url('users/' .$user->id) }}" class="hover:underline">{{ $user->screen_name }}</a>
+                        <a href="{{ url('users/' .$user->id) }}" class="font-bold items-center ml-1 md:ml-4 text-xl text-gray-700 hover:underline">{{ $user->screen_name }}</a>
+                        <div class="md:ml-4">
+                            <span class="text-sm ml-1 md:ml-0">@</span><span class="text-sm">{{ $user->name }}</span>
+                        </div>
                     </div>
                 </div>
-                @if (auth()->user()->isFollowed($user->id))
-                <div class="ml-1 mb-6 rounded-sm self-center bg-gray-200">
-                    <span class="">フォローされています</span>
-                </div>
-                @endif
+
                 <div class="flex-end ml-auto self-center">
                     @if (auth()->user()->isFollowing($user->id))
                     <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">

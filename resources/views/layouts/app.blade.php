@@ -21,20 +21,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans h-full  antialiased flex flex-col">
 
-<<<<<<< Updated upstream
-
-<body class="font-sans antialiased h-full flex flex-col ">
-    <nav class="px-6 py-2 bg-white shadow">
-        <div class="container flex flex-col mx-auto md:flex-row md:items-center md:justify-between">
-            <div class="flex items-center justify-between">
-                <div>
-                    <a href="{{ route('tweets.index') }}" class="text-xl font-bold text-gray-800 md:text-2xl">Brand</a>
-                </div>
-                <div>
-                    <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
-=======
     <nav class="px-6 py-2 bg-white shadow">
         <div x-data="{isOpen: false }" class="max-w-3xl mx-auto py-3 px-6 mb:px-0 md:flex md:justify-between md:items-center">
             <div class="flex justify-between items-center">
@@ -45,40 +33,49 @@
                 <!-- Mobile menu button -->
                 <div class="flex md:hidden">
                     <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" @click="isOpen = !isOpen">
->>>>>>> Stashed changes
-                        <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
-                            <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
-                            </path>
-                        </svg>
-                    </button>
-<<<<<<< Updated upstream
-=======
-                </div>
-            </div>
 
-            <!-- Menu, if mobile set to hidden -->
-            <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
-                <div class="flex flex-col md:flex-row md:ml-6">
-                    <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
-                    <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
-                    <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <input type="submit" value="ログアウト" class="bg-white ">
-                        </form>
+                        <!-- Mobile menu button -->
+                        <div class="flex md:hidden">
+                            <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" @click="isOpen = !isOpen">
+
+                                <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                                    <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                                    </path>
+                                </svg>
+                            </button>
+
+                        </div>
+                </div>
+
+                <!-- Menu, if mobile set to hidden -->
+                <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
+                    <div class="flex flex-col md:flex-row md:ml-6">
+                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
+                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
+                        <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <input type="submit" value="ログアウト" class="bg-white ">
+                            </form>
+                        </div>
+
                     </div>
->>>>>>> Stashed changes
+                </div>
+
+                <!-- Menu, if mobile set to hidden -->
+                <div :class="isOpen ? 'show' : 'hidden'" class="md:flex items-center">
+                    <div class="flex flex-col md:flex-row md:ml-6">
+                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{ route('tweets.index') }}">Home</a>
+                        <a class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="{{route('tweets.create')}}">ツイートする</a>
+                        <div class=" inline my-1 text-sm cursor-pointer text-gray-700 hover:text-indigo-500 md:mx-4 md:my-0">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <input type="submit" value="ログアウト" class="bg-white ">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="flex items-center md:flex md:flex-row md:-mx-4">
-                <div><a href="{{ url('users/' .Auth::user()->id )}}"><img src="{{ asset('storage/profile_image/' .Auth::user()->profile_image) }}" alt="avatar" class=" hidden object-cover w-10 h-10 mr-4 rounded-full sm:block items-center "></a></div>
-                <a href="{{route('tweets.create')}}" class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">ツイートする</a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <input type="submit" value="ログアウト" class=" my-1 bg-white cursor-pointer text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">
-                </form>
-            </div>
-        </div>
     </nav>
     <div class=" bg-gray-100">
         {{ $slot }}

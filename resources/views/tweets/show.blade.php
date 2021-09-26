@@ -8,17 +8,19 @@
     <div class="pt-6">
         <div class="max-w-xl mb-1 px-10 pt-6 pb-2 mx-auto bg-white rounded-lg shadow-md">
             <div class="flex justify-between items-center mt-4">
-                <div><img src="{{ asset('storage/profile_image/' .$tweet->user->profile_image) }}" alt="avatar" class=" hidden object-cover w-20 h-20  rounded-full sm:block items-center "></div>
+                <div><img src="{{ asset('storage/profile_image/' .$tweet->user->profile_image) }}" alt="avatar" class=" mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block items-center "></div>
                 <div class="mr-auto">
-                    <a href="{{ url('users/' .$tweet->user->id) }}" class="font-bold items-center ml-4 text-xl text-gray-700 hover:underline">{{ $tweet->user->screen_name }}</a>
-                    <span class="text-sm">@</span><span class="text-sm">{{ $tweet->user->name }}</span>
+                    <a href="{{ url('users/' .$tweet->user->id) }}" class="font-bold items-center ml-1 md:ml-4 text-xl text-gray-700 hover:underline">{{ $tweet->user->screen_name }}</a>
+                    <div class="md:ml-4">
+                        <span class="text-sm ml-1 md:ml-0">@</span><span class="text-sm">{{ $tweet->user->name }}</span>
+                    </div>
                 </div>
                 @if ($tweet->user->id === Auth::user()->id)
-                <div class=" text-gray-600 font-light ">
+                <div class=" text-gray-600 text-sm font-light ">
                     {{ $tweet->created_at->format('Y-m-d H:i') }}
                 </div>
                 @else
-                <div class=" text-gray-600 mr-9 font-light ">
+                <div class=" text-gray-600 text-sm mr-9 font-light ">
                     {{ $tweet->created_at->format('Y-m-d H:i') }}
                 </div>
                 @endif
@@ -33,21 +35,20 @@
 
                         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
-                        <div x-show="dropdownOpen" class="absolute mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+                        <div x-show="dropdownOpen" class="absolute mt-2 py-2  w-15 md:w-48 bg-white rounded-md shadow-xl z-20">
                             <a href="{{ url('tweets/' .$tweet->id .'/edit') }}" class="block px-4 py-2 text-sm  text-gray-700 hover:bg-blue-500 hover:text-white">
                                 編集
                             </a>
                             <form method="POST" action="{{ url('tweets/' .$tweet->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type=" submit" name="name" value="from_tweets_show" class="text-left w-48 px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">削除</button>
+                                <button type=" submit" class="text-left  w-15 md:w-48 px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">削除</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 @endif
             </div>
-            <!-- alpine ここまで-->
             <div class="mt-2 border-b">
                 <p class="my-5 text-gray-600">{!! nl2br(e($tweet->text)) !!}</p>
             </div>
@@ -83,19 +84,20 @@
 
 
     <div class="max-w-xl px-10 pt-6 pb-2 mx-auto bg-white rounded-lg shadow-md">
-        <div class="border-l-4 border-red-400 -ml-6 pl-6 flex items-center justify-between my-4">
+        <div class="border-l-4 border-red-400 -ml-6 pl-6 my-4">
             <div class="font-semibold text-gray-800">コメント</div>
         </div>
         <hr class="-mx-6" />
 
 
         @forelse ($comments as $comment)
-        <div class="flex items-center justify-between py-4 ">
-            <div><a href="{{ url('users/' .$comment->user->id) }}"><img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" alt="avatar" class=" hidden object-cover w-20 h-20  rounded-full sm:block "></a></div>
+        <div class="flex justify-between items-center  py-4 ">
+            <div><a href="{{ url('users/' .$comment->user->id) }}"><img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" alt="avatar" class="mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block "></a></div>
             <div class="mr-auto">
-                <a href="{{ url('users/' .$comment->user->id) }}" class="font-bold items-center ml-4 text-xl text-gray-700 hover:underline">{{ $comment->user->screen_name }}</a><span class="text-sm">@</span><span class="text-sm">{{ $comment->user->name }}</span>
+                <a href="{{ url('users/' .$comment->user->id) }}" class="font-bold items-center ml-1 md:ml-4 text-xl text-gray-700 hover:underline">{{ $comment->user->screen_name }}</a>
+                <div class="ml-1 md:ml-4"><span class="text-sm">@</span><span class="text-sm">{{ $comment->user->name }}</span></div>
             </div>
-            <div class="text-gray-600 mr-9 font-light">{{ $comment->created_at->format('Y-m-d H:i') }}</div>
+            <div class="text-gray-600 text-sm mr-9 font-light">{{ $comment->created_at->format('Y-m-d H:i') }}</div>
         </div>
         <div class="py-1">
             {!! nl2br(e($comment->text)) !!}
@@ -113,28 +115,30 @@
             <form method="POST" action="{{ route('comments.store') }}">
                 @csrf
                 <div class="flex items-center">
-                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" alt="avatar" class=" hidden object-cover w-20 h-20  rounded-full sm:block ">
+                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" alt="avatar" class="mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block ">
                     <div class="ml-1">
-                        <p class="">{{ $user->name }}</p>
-                        <a href="{{ url('users/' .$user->id) }}" class="hover:underline">{{ $user->screen_name }}</a>
+                        <a href="{{ url('users/' .$user->id) }}" class="font-bold items-center ml-1 md:ml-4 text-xl text-gray-700 hover:underline"">{{ $user->screen_name }}</a>
+                        <div class=" md:ml-4">
+                            <span class="text-sm ml-1 md:ml-0">@</span><span class="text-sm">{{ $tweet->user->name }}</span>
                     </div>
                 </div>
-                <div class="">
-                    <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                    <textarea class="mt-5  w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
-                    @error('text')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-                <div class="text-right">
-                    <p class="mb-4 font-bold text-red-500">140文字以内</p>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        コメントする
-                    </button>
-                </div>
-            </form>
         </div>
+        <div class="">
+            <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
+            <textarea class="mt-5  w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+            @error('text')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="text-right">
+            <p class="mb-4 font-bold text-red-500">140文字以内</p>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                コメントする
+            </button>
+        </div>
+        </form>
+    </div>
     </div>
 </x-app-layout>
