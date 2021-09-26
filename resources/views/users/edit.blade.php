@@ -8,24 +8,21 @@
             <form method="POST" action="{{ url('users/' .$user->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-
-                <div class="">
-                    <div class="">
-                        <div class="">
-                            <label for="profile_image" class="col-md-4 col-form-label text-md-right">{{ __('Profile Image') }}</label>
-                            <div class="flex">
-                                <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class=" hidden object-cover w-20 h-20  rounded-full sm:block items-center ">
-
-                                <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror ml-10 mt-5" autocomplete="profile_image">
-                            </div>
-                        </div>
+                <label for="profile_image" class="">{{ __('Profile Image') }}</label>
+                <div class="flex">
+                    <div>
+                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class=" mt-4 h-10 w-10 object-cover md:w-20 md:h-20 rounded-full sm:block items-center ">
+                    </div>
+                    <div class="w-32">
+                        <input type="file" name="profile_image" class=" @error('profile_image') is-invalid @enderror  ml-4 mt-5" autocomplete="profile_image">
                         @error('profile_image')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong class="">{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
                 </div>
+
 
                 <div class="mt-4">
                     <label for="screen_name" class="">{{ __('Account Name') }}</label>
