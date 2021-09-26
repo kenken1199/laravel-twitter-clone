@@ -76,6 +76,30 @@
             </div>
         </div>
     </footer>
+    <script>
+        let btns = document.querySelectorAll('.like_button');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', async function() {
+                const tweet_id = this.dataset.tweet_id;
+                let tweet = {};
+                tweet.tweet_id = tweet_id;
+                var d = JSON.stringify(tweet);
+                let response = await fetch("{{ route('like') }}", {
+                    headers: {
+                        "X-CSRF-Token": document.querySelector('input[name=_token]').value,
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    method: 'POST',
+                    body: d,
+                })
+                const data = await response.json();
+                const counter = this.nextElementSibling;
+                counter.innerHTML = data.review_likes_count;
+                this.classList.toggle('text-red-600')
+                this.classList.toggle('fas')
+            }, false);
+        }
+    </script>
 </body>
 
 </html>
