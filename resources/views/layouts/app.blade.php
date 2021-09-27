@@ -28,7 +28,7 @@
         <div x-data="{isOpen: false }" class="max-w-3xl mx-auto py-3 px-6 mb:px-0 md:flex md:justify-between md:items-center">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <img src="{{ asset('storage/profile_image/' .Auth::user()->profile_image) }}" alt="avatar" class=" h-8 w-8 shadow rounded-full">
+                    <img src="{{ asset('storage/profile_image/' .Auth::user()->profile_image) }}" alt="avatar" class=" h-10 w-10 object-cover shadow rounded-full">
                     <a href="{{ url('users/' .Auth::user()->id )}}" class="text-gray-800 text-xl hover:text-gray-700 ml-4">{{Auth::user()->name}}</a>
                 </div>
                 <!-- Mobile menu button -->

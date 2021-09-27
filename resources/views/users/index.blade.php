@@ -40,12 +40,11 @@
                 </div>
             </div>
         </div>
-        @endforeach
+    </div>
+    @endforeach
 
 
-        <div class="py-8 flex justify-center">
-            {{ $all_users->links() }}
-        </div>
-
+    <div class="py-8 flex justify-center">
+        {{ $all_users->links() }}
     </div>
 </x-app-layout>

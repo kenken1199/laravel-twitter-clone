@@ -4,9 +4,9 @@
         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">User</h1>
     </div>
     <div class="py-6">
-        <div class="max-w-xl px-10 pt-6 pb-6 mx-auto bg-white rounded-lg shadow-md">
+        <div class="max-w-xl px-2 pt-6 pb-6 mx-auto bg-white rounded-lg shadow-md">
             <div class="flex items-center flex-col justify-center">
-                <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" alt="avatar" class=" h-10 w-10 object-cover md:w-20 md:h-20  rounded-full sm:block items-center ">
+                <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" alt="avatar" class="h-10 w-10 object-cover md:w-20 md:h-20  rounded-full sm:block items-center ">
                 <div class="ml-3 mt-2">
                     <div class="font-bold items-center text-xl text-gray-700">{{ $user->screen_name }}</div>
                     <span class="text-sm ml-4">@</span><span class="text-sm">{{ $user->name }}</span>
@@ -14,12 +14,14 @@
             </div>
 
             <div>
+                @if ($user->id === Auth::user()->id)
                 <div class="flex justify-center mt-2">
-                    @if ($user->id === Auth::user()->id)
+
                     <a href="{{ url('users/' .$user->id .'/edit') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">プロフィールを編集する</a>
                 </div>
+                @else
                 <div class="flex justify-center mt-2">
-                    @else
+
                     @if ($is_followed)
                     <span class=" ml-4  rounded-sm bg-gray-200">フォローされています</span>
                     @endif
@@ -42,19 +44,19 @@
                 </div>
                 @endif
             </div>
-            <div class="flex mt-6 items-center justify-between">
-                <div class="flex-1 ml-8 md:ml-16">
+            <div class="flex mt-6 items-center w-auto justify-between">
+                <div class="flex-1 ml-4 md:ml-16">
                     <p class="font-bold ">ツイート数</p>
                     <span class="ml-8">{{ $tweet_count }}</span>
                 </div>
 
                 <div class="flex-1">
-                    <p class="font-bold px-auto">フォロー数</p>
-                    <span class="ml-8">{{ $follow_count }}</span>
+                    <p class="font-bold ml-2">フォロー数</p>
+                    <span class="ml-11">{{ $follow_count }}</span>
                 </div>
                 <div class="flex-1">
-                    <p class="font-bold">フォロワー数</p>
-                    <span class="ml-10">{{ $follower_count }}</span>
+                    <p class="font-bold ml-2">フォロワー数</p>
+                    <span class="ml-11">{{ $follower_count }}</span>
                 </div>
             </div>
         </div>
@@ -66,7 +68,7 @@
     <div class="pt-6">
         <div class="max-w-xl px-10 pt-6 pb-2 mx-auto bg-white rounded-lg shadow-md">
             <div class="flex justify-between items-center mt-4">
-                <div><img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" alt="avatar" class=" mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block items-center "></div>
+                <div><img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" alt="avatar" class=" hidden mx-2 my-2 h-8 w-8 object-cover md:w-20 md:h-20  rounded-full sm:block items-center "></div>
                 <div class="mr-auto">
                     <a href="{{ url('users/' .$timeline->user->id) }}" class="font-bold items-center ml-1 md:ml-4 text-xl text-gray-700 hover:underline">{{ $timeline->user->screen_name }}</a>
                     <div class="md:ml-4">
@@ -87,11 +89,11 @@
                 @if ($timeline->user->id === Auth::user()->id)
                 <div class="flex">
                     <div x-data="{ dropdownOpen: false }" class="">
-                        <button @click="dropdownOpen =!dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                        <button @click="dropdownOpen =!dropdownOpen" class="relative block rounded-md bg-white p-2 focus:outline-none">
                             <i class="fas fa-ellipsis-v fa-fw"></i>
                         </button>
 
-                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full "></div>
 
                         <div x-show="dropdownOpen" class="absolute mt-2 py-2  w-15 md:w-48 bg-white rounded-md shadow-xl z-20">
                             <a href="{{ url('tweets/' .$timeline->id .'/edit') }}" class="block px-4 py-2 text-sm  text-gray-700 hover:bg-blue-500 hover:text-white">
@@ -138,6 +140,7 @@
             </div>
         </div>
     </div>
+
     <!-- ここまで -->
     @endforeach
     <div class="py-8 flex justify-center">
