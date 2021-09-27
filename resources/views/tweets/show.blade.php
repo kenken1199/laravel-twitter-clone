@@ -29,11 +29,11 @@
                 @if ($tweet->user->id === Auth::user()->id)
                 <div class="flex">
                     <div x-data="{ dropdownOpen: false }" class="">
-                        <button @click="dropdownOpen =!dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                        <button @click="dropdownOpen =!dropdownOpen" class="relative  block rounded-md bg-white p-2 focus:outline-none">
                             <i class="fas fa-ellipsis-v fa-fw"></i>
                         </button>
 
-                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full "></div>
 
                         <div x-show="dropdownOpen" class="absolute mt-2 py-2  w-15 md:w-48 bg-white rounded-md shadow-xl z-20">
                             <a href="{{ url('tweets/' .$tweet->id .'/edit') }}" class="block px-4 py-2 text-sm  text-gray-700 hover:bg-blue-500 hover:text-white">
