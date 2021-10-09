@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
+use App\Models\User;
 
 class TweetsController extends Controller
 {
@@ -140,5 +141,24 @@ class TweetsController extends Controller
             return redirect('tweets');
         }
         return back();
+    }
+
+    public function search(Request $request, Tweet $tweet, Follower $follower)
+    {
+        $user = auth()->user();
+        $follow_ids = $follower->followingIds($user->id);
+        // followed_idだけ抜き出す
+        $following_ids = $follow_ids->pluck('followed_id')->toArray();
+        $keyword = $request->keyword;
+        if (!empty($keyword)) {
+            global $search_timelines;
+            $search_timelines = $tweet->getKeywordTimeLines($user->id, $following_ids, $keyword);
+            return view('tweets.search', [
+                'user' => $user,
+                'timelines' => $search_timelines
+            ]);
+        }
+        $message = "キーワードを入力してください。";
+        return view('tweets.search')->with('message', $message);
     }
 }

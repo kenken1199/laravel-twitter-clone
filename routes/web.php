@@ -46,4 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('favorites', FavoritesController::class, ['only' => ['store', 'destroy']]);
 
     Route::post('/like', [FavoritesController::class, 'like'])->name('like');
+
+    Route::post('/search', [TweetsController::class, 'search'])->name(('search'));
+
+    Route::get('/search', [TweetsController::class, 'search'])->name(('search'));
 });
