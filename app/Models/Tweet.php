@@ -86,4 +86,12 @@ class Tweet extends Model
     {
         return Favorite::where('user_id', $user->id)->where('tweet_id', $this->id)->first() !== null;
     }
+
+    // キーワード検索
+    public function getKeywordTimeLines(Int $user_id, array $follow_ids, String $keyword)
+    {
+        // 自身とフォローしているユーザIDを結合する
+        $follow_ids[] = $user_id;
+        return $this->WhereIn('user_id', $follow_ids)->where('text', 'like', '%' . $keyword . '%')->orderBy('created_at', 'DESC')->paginate(5);
+    }
 }

@@ -10,7 +10,7 @@
         <a href=" {{ url('users') }}" class=" hover:underline ">ユーザ一覧<i class=" fas fa-users" class="fa-fw"></i></a>
     </div>
     <!-- 各ポストのカラム -->
-    @if (isset($timelines))
+    @if (!empty($timelines) && $timelines->count() !== 0)
     @foreach ($timelines as $timeline)
     <div class="pt-6 mb-4">
         <div class="max-w-xl px-1 md:px-10 md:pt-6 md:pb-2 md:mx-auto bg-white rounded-lg shadow-md">
@@ -96,10 +96,20 @@
         </div>
         <!-- ここまで -->
         @endforeach
-        @endif
-        <!-- ページネーション -->
+
+        <!-- ページネーション: appendsでパラメータを指定する -->
         <div class="py-8 flex justify-center">
-            {{ $timelines->links() }}
+            {{ $timelines->appends(request()->input())->links() }}
         </div>
+        <!-- /ページネーション -->
+
+        @endif
+        @if (!empty($timelines) && $timelines->count() === 0)
+        <div class="py-8 flex justify-center">キーワードに該当するものがありません</div>
+        @endif
+
+        @if (empty($timelines))
+        <div class="py-8 flex justify-center">{{$message}}</div>
+        @endif
 
 </x-app-layout>
