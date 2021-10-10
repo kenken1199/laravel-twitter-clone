@@ -5,7 +5,7 @@
         <h1 class="  text-xl font-bold text-gray-700 md:text-2xl">Posts</h1>
         <form action="{{url('/search')}}" method="post">
             {{ csrf_field()}}
-            <input type="text" class=" w-96" placeholder="検索したいキーワードを入力してください" name=keyword>
+            <input type="text" class=" w-44  md:w-96" placeholder="検索したいキーワードを入力してください" name=keyword>
         </form>
         <a href=" {{ url('users') }}" class=" hover:underline ">ユーザ一覧<i class=" fas fa-users" class="fa-fw"></i></a>
     </div>
